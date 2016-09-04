@@ -1,4 +1,4 @@
-package com.example.hiran.onemarket;
+package com.example.hiran.onemarket.Activities;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -11,6 +11,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.hiran.onemarket.Util.PasswordHash;
+import com.example.hiran.onemarket.R;
 
 /**
  * Created by hiran on 9/3/16.

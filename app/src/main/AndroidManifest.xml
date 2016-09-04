@@ -9,25 +9,25 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".Activities.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
-                <action android:name="com.example.hiran.onemarket.MainActivity" />
+                <action android:name="com.example.hiran.onemarket.Activities.MainActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
 
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity">
+        <activity android:name=".Activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
 
             </intent-filter>
         </activity>
-        <activity android:name=".SignUpActivity">
+        <activity android:name=".Activities.SignUpActivity">
             <intent-filter>
-                <action android:name="com.example.hiran.onemarket.SignUpActivity" />
+                <action android:name="com.example.hiran.onemarket.Activities.SignUpActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

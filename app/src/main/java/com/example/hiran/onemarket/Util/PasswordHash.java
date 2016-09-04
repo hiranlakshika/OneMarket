@@ -1,4 +1,4 @@
-package com.example.hiran.onemarket;
+package com.example.hiran.onemarket.Util;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
