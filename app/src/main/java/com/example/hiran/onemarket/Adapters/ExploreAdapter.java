@@ -10,13 +10,13 @@ import java.util.List;
 /**
  * Created by hiran on 9/4/16.
  */
-public class HomeAdapter extends BaseAdapter {
+public class ExploreAdapter extends BaseAdapter{
 
-    private List<String> homeList = new ArrayList<>();
+    private List<String> exploreList = new ArrayList<>();
 
     @Override
     public int getCount() {
-        return homeList.size();
+        return exploreList.size();
     }
 
     @Override
@@ -31,7 +31,6 @@ public class HomeAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
         return null;
     }
 }
