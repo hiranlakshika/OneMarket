@@ -1,8 +1,12 @@
 package com.example.hiran.onemarket.Adapters;
 
+import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+
+import com.example.hiran.onemarket.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +16,15 @@ import java.util.List;
  */
 public class HomeAdapter extends BaseAdapter {
 
+    LayoutInflater layoutInflater;
+    Context context;
+
     private List<String> homeList = new ArrayList<>();
+
+    public HomeAdapter(Context context, List<String> homeList) {
+        this.context = context;
+        this.homeList = homeList;
+    }
 
     @Override
     public int getCount() {
@@ -31,7 +43,7 @@ public class HomeAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
-        return null;
+        convertView = layoutInflater.inflate(R.layout.home_custom_list, null);
+        return convertView;
     }
 }
