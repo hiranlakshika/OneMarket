@@ -15,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.hiran.onemarket.Fragments.AboutFragment;
 import com.example.hiran.onemarket.Fragments.ExploreFragment;
@@ -74,6 +75,7 @@ public class MainActivity extends AppCompatActivity
             FragmentTransaction ft = fragmentManager.beginTransaction();
             ft.replace(R.id.fragment_place, fragment);
             ft.commit();
+            Toast.makeText(this, "AboutFragment()", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_share) {
 
         }

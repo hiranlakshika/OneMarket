@@ -26,7 +26,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         homeAdapter = new HomeAdapter(getActivity().getApplicationContext(), homeList);
         homeGridView = (GridView) getActivity().findViewById(R.id.home_grid_view);
-        homeGridView.setAdapter(homeAdapter);
+        //homeGridView.setAdapter(homeAdapter);
         return inflater.inflate(R.layout.home_layout, container, false);
     }
 }

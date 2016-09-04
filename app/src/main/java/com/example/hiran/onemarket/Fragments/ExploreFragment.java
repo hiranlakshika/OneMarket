@@ -26,7 +26,7 @@ public class ExploreFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         exploreList = (ListView) getActivity().findViewById(R.id.explore_list);
         exploreAdapter = new ExploreAdapter(getActivity().getApplicationContext(), explore);
-        exploreList.setAdapter(exploreAdapter);
+        //exploreList.setAdapter(exploreAdapter);
         return inflater.inflate(R.layout.explore_layout, container, false);
     }
 }
