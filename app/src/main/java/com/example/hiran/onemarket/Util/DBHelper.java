@@ -102,6 +102,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public int getNumberRows(String table) {
         return (int) DatabaseUtils.queryNumEntries(db, table);
     }
+
     public void checkUser(EditText uname, EditText password, String TAG) {
 
         String pass = "";

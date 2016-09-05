@@ -8,11 +8,9 @@
     tools:context=".Activities.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <fragment
+    <FrameLayout
         android:id="@+id/fragment_place"
-        android:name="com.example.hiran.onemarket.Fragments.HomeFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout="@layout/home_layout" />
+        android:layout_height="match_parent" />
 
 </RelativeLayout>

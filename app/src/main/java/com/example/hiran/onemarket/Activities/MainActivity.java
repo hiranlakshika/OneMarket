@@ -60,22 +60,22 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         Fragment fragment = null;
         FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction ft;
         if (id == R.id.nav_first_layout) {
             fragment = new HomeFragment();
-            FragmentTransaction ft = fragmentManager.beginTransaction();
+            ft = fragmentManager.beginTransaction();
             ft.replace(R.id.fragment_place, fragment);
             ft.commit();
         } else if (id == R.id.nav_second_layout) {
             fragment = new ExploreFragment();
-            FragmentTransaction ft = fragmentManager.beginTransaction();
+            ft = fragmentManager.beginTransaction();
             ft.replace(R.id.fragment_place, fragment);
             ft.commit();
         } else if (id == R.id.nav_third_layout) {
             fragment = new AboutFragment();
-            FragmentTransaction ft = fragmentManager.beginTransaction();
+            ft = fragmentManager.beginTransaction();
             ft.replace(R.id.fragment_place, fragment);
             ft.commit();
-            Toast.makeText(this, "AboutFragment()", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_share) {
 
         }
