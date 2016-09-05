@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.hiran.onemarket.R;
-import com.example.hiran.onemarket.Util.AppDatabase;
+import com.example.hiran.onemarket.Util.DBHelper;
 
 /**
  * Created by hiran on 9/3/16.
@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_log_in:
-                AppDatabase.getInstance().checkUser(uname,password,TAG);
+                DBHelper.getInstance(this).checkUser(uname,password,TAG);
                 break;
             case R.id.sign_up:
                 Intent intent = new Intent(SignUpActivity.class.getName());

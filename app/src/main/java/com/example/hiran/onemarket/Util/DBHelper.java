@@ -4,13 +4,20 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.example.hiran.onemarket.Activities.MainActivity;
 
 
 /**
@@ -20,11 +27,12 @@ public class DBHelper extends SQLiteOpenHelper {
 
     private static final String TAG = DBHelper.class.getSimpleName();
     private static final String DATABASE_FILE = "my_db_script.sql";
-    private static final String DATABASE_NAME = "my_db_filename.db";
+    private static final String DATABASE_NAME = "store.db";
     private static final int DATABASE_VERSION = 1;
     private static final int BUFFER_SIZE = 2048;
 
     private static SQLiteDatabase db;
+    private static  Cursor c;
     private static DBHelper instance;
     private static Context context;
 
@@ -94,5 +102,68 @@ public class DBHelper extends SQLiteOpenHelper {
     public int getNumberRows(String table) {
         return (int) DatabaseUtils.queryNumEntries(db, table);
     }
+    public void checkUser(EditText uname, EditText password, String TAG) {
+
+        String pass = "";
+        try {
+            c = db.rawQuery("SELECT password FROM login where username = '" + uname.getText().toString() + "'", null);
+            if (c.getCount() == 0) {
+                showMessage("Error", "Wrong details");
+                return;
+            }
+            while (c.moveToNext()) {
+                pass = c.getString(c.getColumnIndex("password"));
+            }
+            if (PasswordHash.encryptPassword(password.getText().toString()).equals(pass)) {
+                Toast.makeText(context, "Login success", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.class.getName());
+                uname.setText("");
+                password.setText("");
+                context.startActivity(intent);
+            } else {
+                Toast.makeText(context, "Login Error", Toast.LENGTH_SHORT).show();
+            }
+        } catch (android.database.sqlite.SQLiteException ex) {
+            Log.v(TAG, ex.getMessage());
+        }
+
+    }
+    public void createDB() {
+        db.execSQL("CREATE TABLE IF NOT EXISTS item(item_code VARCHAR,item_name VARCHAR,unit_price int,description VARCHAR,stock int);");
+        db.execSQL("CREATE TABLE IF NOT EXISTS bill(trans_id VARCHAR,total int);");
+        db.execSQL("CREATE TABLE IF NOT EXISTS sales(trans_id VARCHAR,item_code VARCHAR,quantity int);");
+        db.execSQL("CREATE TABLE IF NOT EXISTS login(username VARCHAR,password VARCHAR);");
+    }
+
+    public void selectDB() {
+        c = db.rawQuery("SELECT * FROM sales", null);
+        if (c.getCount() == 0) {
+            showMessage("Error", "No records found");
+            return;
+        }
+        StringBuffer buffer = new StringBuffer();
+        while (c.moveToNext()) {
+            buffer.append("trans_id: " + c.getString(0) + "\n");
+            buffer.append("item_code: " + c.getString(1) + "\n");
+            buffer.append("quantity: " + c.getString(2) + "\n\n");
+        }
+        showMessage("Student Details", buffer.toString());
+    }
+
+    public void showMessage(String title, String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setCancelable(true);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.show();
+    }
+
+    public void insertIntoDB() {
+//        db.execSQL("INSERT INTO sales VALUES('10','abcd',50);");
+//        db.execSQL("INSERT INTO bill VALUES('10',444);");
+//        db.execSQL("INSERT INTO item VALUES('abcd','Mobile Phone',15000,'Samsung',104);");
+        db.execSQL("INSERT INTO login VALUES('Hiran','40bd001563085fc35165329ea1ff5c5ecbdbbeef');");
+    }
+
 
 }
