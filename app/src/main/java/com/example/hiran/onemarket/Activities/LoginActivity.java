@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_log_in:
-                DBHelper.getInstance(this).checkUser(uname,password,TAG);
+                DBHelper.getInstance(this).checkUser(uname,password);
                 break;
             case R.id.sign_up:
                 Intent intent = new Intent(SignUpActivity.class.getName());

@@ -11,7 +11,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.hiran.onemarket.R;
+import com.example.hiran.onemarket.Util.DBHelper;
 import com.example.hiran.onemarket.Util.PasswordHash;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by hiran on 9/4/16.
@@ -22,7 +26,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private CheckBox terms;
     private Button sign;
     private final String TAG = SignUpActivity.class.getSimpleName();
-    private SQLiteDatabase db;
+    private static final Pattern VALID_EMAIL_ADDRESS_REGEX =
+            Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,31 +45,34 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         sign.setOnClickListener(this);
     }
 
-    private void signUp() {
-        try {
-            db.execSQL("INSERT INTO login VALUES('" + uname.getText().toString() + "','" + PasswordHash.encryptPassword(passwd.getText().toString()) + "');");
-        } catch (android.database.sqlite.SQLiteException ex) {
-            Log.v(TAG, ex.getMessage());
-        }
-
-    }
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_sign_up:
-                try {
-                    if (uname.getText().toString() != "" && passwd.getText().toString() != "" &&
-                            repasswd.getText().toString() != "" && email.getText().toString() != "" &&
-                            reemail.getText().toString() != "" && terms.isChecked()) {
-                        signUp();
+                if (!uname.getText().toString().equals("") && !passwd.getText().toString().equals("") &&
+                        !repasswd.getText().toString().equals("") && !email.getText().toString().equals("") &&
+                        !reemail.getText().toString().equals("") && terms.isChecked()) {
+                    if (!passwd.getText().toString().equals(repasswd.getText().toString())) {
+                        Toast.makeText(this, "Passwords didn't match", Toast.LENGTH_SHORT).show();
+                    } else if (!email.getText().toString().equals(reemail.getText().toString())) {
+                        Toast.makeText(this, "Emails didn't match", Toast.LENGTH_SHORT).show();
+                    } else if (validateEmail(email.getText().toString()) == false || validateEmail(reemail.getText().toString()) == false) {
+                        Toast.makeText(this, "Please enter valid email", Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(this, "Please complete above details", Toast.LENGTH_SHORT).show();
+                        DBHelper.getInstance(this).signUp(uname, passwd);
+                        Toast.makeText(this, "User has been added", Toast.LENGTH_SHORT).show();
+                        super.onBackPressed();
                     }
-                } catch (NullPointerException ex) {
-                    Log.v(TAG, ex.getMessage());
+
+                } else {
+                    Toast.makeText(this, "Please complete above details", Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
+    }
+
+    private static boolean validateEmail(String emailStr) {
+        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
+        return matcher.find();
     }
 }

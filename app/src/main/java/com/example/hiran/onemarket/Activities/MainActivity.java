@@ -13,9 +13,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.example.hiran.onemarket.Fragments.AboutFragment;
 import com.example.hiran.onemarket.Fragments.ExploreFragment;

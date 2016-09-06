@@ -103,7 +103,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return (int) DatabaseUtils.queryNumEntries(db, table);
     }
 
-    public void checkUser(EditText uname, EditText password, String TAG) {
+    public void checkUser(EditText uname, EditText password) {
 
         String pass = "";
         try {
@@ -125,7 +125,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 Toast.makeText(context, "Login Error", Toast.LENGTH_SHORT).show();
             }
         } catch (android.database.sqlite.SQLiteException ex) {
-            Log.v(TAG, ex.getMessage());
+            Log.e(TAG, ex.getMessage());
         }
 
     }
@@ -166,5 +166,13 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO login VALUES('Hiran','40bd001563085fc35165329ea1ff5c5ecbdbbeef');");
     }
 
+    public void signUp(EditText uname,EditText passwd) {
+        try {
+            db.execSQL("INSERT INTO login VALUES('" + uname.getText().toString() + "','" + PasswordHash.encryptPassword(passwd.getText().toString()) + "');");
+        } catch (android.database.sqlite.SQLiteException ex) {
+            Log.v(TAG, ex.getMessage());
+        }
+
+    }
 
 }
