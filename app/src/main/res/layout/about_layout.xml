@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:gravity="center"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#581010">
+    android:gravity="center"
+    android:orientation="vertical">
+
     <TextView
-        android:textStyle="bold"
-        android:textSize="30dp"
-        android:textAlignment="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="@string/about_version"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:text="@string/about_rights"
-        android:textSize="17dp"
         android:textAlignment="center"
+        android:textSize="30dp"
+        android:textStyle="bold" />
+
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="@string/about_rights"
+        android:textAlignment="center"
+        android:textSize="17dp" />
 </LinearLayout>

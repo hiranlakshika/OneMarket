@@ -18,15 +18,25 @@ import java.util.List;
  */
 public class ExploreFragment extends Fragment {
 
-    private List<String> explore = new ArrayList<>();
+
     private ExploreAdapter exploreAdapter = null;
     private ListView exploreList;
 
+    private List<String> sendItems() {
+        List<String> explore = new ArrayList<>();
+        explore.add("100");
+        explore.add("200");
+        explore.add("110");
+        explore.add("120");
+        return explore;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        exploreList = (ListView) getActivity().findViewById(R.id.explore_list);
-        exploreAdapter = new ExploreAdapter(getActivity().getApplicationContext(), explore);
-        //exploreList.setAdapter(exploreAdapter);
-        return inflater.inflate(R.layout.explore_layout, container, false);
+        View view = inflater.inflate(R.layout.explore_layout, container, false);
+        exploreList = (ListView) view.findViewById(R.id.explore_list);
+        exploreAdapter = new ExploreAdapter(getActivity(), sendItems());
+        exploreList.setAdapter(exploreAdapter);
+        return view;
     }
 }

@@ -5,10 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.hiran.onemarket.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,13 +17,14 @@ import java.util.List;
  */
 public class ExploreAdapter extends BaseAdapter {
 
-    private List<String> exploreList = new ArrayList<>();
-    LayoutInflater layoutInflater;
-    Context context;
+    private List<String> exploreList;
+    private LayoutInflater layoutInflater;
+    private Context context;
 
     public ExploreAdapter(Context context, List<String> exploreList) {
         this.context = context;
         this.exploreList = exploreList;
+        layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
@@ -42,8 +44,18 @@ public class ExploreAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        convertView = layoutInflater.inflate(R.layout.explore_custom_list, null);
+        View view;
 
-        return convertView;
+        if (convertView == null) {
+            view = layoutInflater.inflate(R.layout.explore_custom_list, null);
+            ImageView listImg = (ImageView) view.findViewById(R.id.explore_list_img);
+            TextView title = (TextView) view.findViewById(R.id.explore_list_title);
+            TextView price = (TextView) view.findViewById(R.id.explore_list_price);
+
+            price.setText(exploreList.get(position));
+        } else {
+            view = convertView;
+        }
+        return view;
     }
 }
