@@ -1,9 +1,7 @@
 package com.example.hiran.onemarket.Activities;
 
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -12,7 +10,6 @@ import android.widget.Toast;
 
 import com.example.hiran.onemarket.R;
 import com.example.hiran.onemarket.Util.DBHelper;
-import com.example.hiran.onemarket.Util.PasswordHash;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -33,7 +30,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_up);
-        //db =((LoginActivity)getApplication()).db
         uname = (EditText) findViewById(R.id.txt_uname);
         email = (EditText) findViewById(R.id.txt_email);
         passwd = (EditText) findViewById(R.id.txt_passwrd);
@@ -63,7 +59,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                         Toast.makeText(this, "User has been added", Toast.LENGTH_SHORT).show();
                         super.onBackPressed();
                     }
-
                 } else {
                     Toast.makeText(this, "Please complete above details", Toast.LENGTH_SHORT).show();
                 }

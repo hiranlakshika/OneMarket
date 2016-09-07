@@ -1,10 +1,14 @@
 package com.example.hiran.onemarket.Adapters;
 
 import android.content.Context;
+import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.hiran.onemarket.R;
 
@@ -16,19 +20,23 @@ import java.util.List;
  */
 public class HomeAdapter extends BaseAdapter {
 
-    LayoutInflater layoutInflater;
-    Context context;
 
-    private List<String> homeList = new ArrayList<>();
+    private LayoutInflater layoutInflater;
+    private Context context;
+    private int[] image;
+    private String[] title, price;
 
-    public HomeAdapter(Context context, List<String> homeList) {
+    public HomeAdapter(Context context, int[] image, String[] price, String[] title) {
         this.context = context;
-        this.homeList = homeList;
+        this.image = image;
+        this.price = price;
+        this.title = title;
+        layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
     public int getCount() {
-        return homeList.size();
+        return image.length;
     }
 
     @Override
@@ -43,7 +51,19 @@ public class HomeAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        convertView = layoutInflater.inflate(R.layout.home_custom_list, null);
-        return convertView;
+        View view;
+
+        if (convertView != null) {
+            view = layoutInflater.inflate(R.layout.home_custom_list, null);
+            ImageView imageView = (ImageView) view.findViewById(R.id.home_grid_image);
+            TextView imageTitle = (TextView) view.findViewById(R.id.grid_image_title);
+            TextView pricetxt = (TextView) view.findViewById(R.id.grid_img_price);
+            imageView.setImageResource(image[position]);
+            imageTitle.setText(title[position]);
+            pricetxt.setText(price[position]);
+        } else {
+            view = convertView;
+        }
+        return view;
     }
 }
