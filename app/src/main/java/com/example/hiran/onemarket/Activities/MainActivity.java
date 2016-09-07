@@ -38,6 +38,15 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //This fragment shows as the main fragment when the activity starts
+        Fragment fragment = null;
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction ft;
+        fragment = new HomeFragment();
+        ft = fragmentManager.beginTransaction();
+        ft.replace(R.id.fragment_place, fragment);
+        ft.commit();
     }
 
     @Override
