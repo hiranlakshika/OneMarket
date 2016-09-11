@@ -196,6 +196,25 @@ public class DBHelper extends SQLiteOpenHelper {
         return items;
     }
 
+    public List<String> getBrand() {
+        List<String> items = new ArrayList<>();
+        for (int i = 1; i <= 10; i++) {
+            try {
+                c = db.rawQuery("SELECT description FROM item where item_code = '" + i + "'", null);
+                if (c.getCount() == 0) {
+                    break;
+                }
+                while (c.moveToNext()) {
+                    items.add(c.getString(c.getColumnIndex("description")));
+                }
+
+            } catch (android.database.sqlite.SQLiteException ex) {
+                Log.e(TAG, ex.getMessage());
+            }
+        }
+        return items;
+    }
+
     public List<String> getPrices() {
         List<String> items = new ArrayList<>();
         for (int i = 1; i <= 10; i++) {
