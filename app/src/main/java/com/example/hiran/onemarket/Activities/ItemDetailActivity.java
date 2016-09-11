@@ -21,14 +21,13 @@ public class ItemDetailActivity extends AppCompatActivity implements View.OnClic
     private List<String> itemTitles = new ArrayList<>();
     private List<String> itemPrices = new ArrayList<>();
     private List<String> brand = new ArrayList<>();
-    private TextView title;
     private Button addCart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.item_details);
-        title = (TextView) findViewById(R.id.detail_item_name);
+        TextView title = (TextView) findViewById(R.id.detail_item_name);
         itemTitles = DBHelper.getInstance(this).getItems();
         itemPrices = DBHelper.getInstance(this).getPrices();
         brand = DBHelper.getInstance(this).getBrand();
