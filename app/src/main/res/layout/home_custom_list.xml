@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="100dp"
+    android:layout_height="145dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
     android:gravity="center"
+    android:background="@drawable/grid_items_border"
     android:orientation="vertical">
 
     <ImageView
-        android:background="@drawable/home"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/j7"
         android:id="@+id/home_grid_image"
         android:layout_width="90dp"
         android:layout_height="90dp" />
