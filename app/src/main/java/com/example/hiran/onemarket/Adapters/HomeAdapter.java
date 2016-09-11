@@ -62,11 +62,6 @@ public class HomeAdapter extends BaseAdapter {
         } else {
             view = convertView;
         }
-        final BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inSampleSize = 8;
-
-        Bitmap note5 = BitmapFactory.decodeResource(context.getResources(), R.drawable.note5,options);
-        Bitmap j7 = BitmapFactory.decodeResource(context.getResources(), R.drawable.j7,options);
 
         ImageView imageView = (ImageView) view.findViewById(R.id.home_grid_image);
         TextView imageTitle = (TextView) view.findViewById(R.id.grid_image_title);
@@ -75,8 +70,8 @@ public class HomeAdapter extends BaseAdapter {
             if (titles.get(position).equals("Xperia X")) {
                 imageView.setImageResource(R.drawable.xperia_x);
             }
-            if (titles.get(position).equals("Galxy J7")) {
-                imageView.setImageBitmap(j7);
+            if (titles.get(position).equals("Galaxy J7")) {
+                imageView.setImageResource(R.drawable.j7);
             }
             if (titles.get(position).equals("Galaxy J5")) {
                 imageView.setImageResource(R.drawable.j5);
@@ -88,8 +83,8 @@ public class HomeAdapter extends BaseAdapter {
                 imageView.setImageResource(R.drawable.oneplus_3);
             }
             if (titles.get(position).equals("Galaxy Note 5")) {
-//                imageView.setImageResource(R.drawable.note5);
-                imageView.setImageBitmap(note5);
+                imageView.setImageResource(R.drawable.note5);
+
             }
             if (titles.get(position).equals("Xperia Z3")) {
                 imageView.setImageResource(R.drawable.xperia_z3);
@@ -104,7 +99,7 @@ public class HomeAdapter extends BaseAdapter {
                 imageView.setImageResource(R.drawable.s7);
             }
         } catch (java.lang.OutOfMemoryError e) {
-            Log.e(TAG,e.getMessage());
+            Log.e(TAG, e.getMessage());
         }
         imageTitle.setText(titles.get(position));
         pricetxt.setText(price.get(position));
