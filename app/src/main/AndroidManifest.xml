@@ -33,7 +33,13 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.ItemDetailActivity"></activity>
+        <activity android:name=".Activities.ItemDetailActivity">
+            <intent-filter>
+                <action android:name="com.example.hiran.onemarket.Activities.ItemDetailActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
