@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.Toast;
 
 import com.example.hiran.onemarket.Activities.ItemDetailActivity;
 import com.example.hiran.onemarket.Adapters.HomeAdapter;
@@ -35,9 +34,6 @@ public class HomeFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Bundle bundle = new Bundle();
-
-                Toast.makeText(getActivity(),
-                        "Item Clicked: " + position, Toast.LENGTH_SHORT).show();
                 bundle.putInt("Position", position);
                 Intent intent = new Intent(getActivity(),ItemDetailActivity.class);
                 intent.putExtras(bundle);

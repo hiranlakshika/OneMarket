@@ -102,7 +102,7 @@ public class HomeAdapter extends BaseAdapter {
             Log.e(TAG, e.getMessage());
         }
         imageTitle.setText(titles.get(position));
-        pricetxt.setText(price.get(position));
+        pricetxt.setText("Rs. "+price.get(position));
 
         return view;
     }
