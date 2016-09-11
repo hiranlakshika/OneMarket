@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import com.example.hiran.onemarket.Adapters.HomeAdapter;
 import com.example.hiran.onemarket.R;
@@ -26,6 +28,14 @@ public class HomeFragment extends Fragment {
         homeAdapter = new HomeAdapter(view.getContext(), DBHelper.getInstance(getActivity()).getPrices(), DBHelper.getInstance(getActivity()).getItems());
         homeGridView = (GridView) view.findViewById(R.id.home_grid_view);
         homeGridView.setAdapter(homeAdapter);
+
+        homeGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getActivity(),
+                        "Item Clicked: " + position, Toast.LENGTH_SHORT).show();
+            }
+        });
         return view;
     }
 
