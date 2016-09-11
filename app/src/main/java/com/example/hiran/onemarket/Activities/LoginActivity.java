@@ -33,6 +33,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         TextView signUp = (TextView) findViewById(R.id.sign_up);
         signUp.setOnClickListener(this);
 
+        //Inserting data into database
+//        DBHelper.getInstance(this).insertIntoDB();
+
     }
 
     @Override

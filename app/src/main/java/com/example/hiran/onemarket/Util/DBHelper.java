@@ -2,7 +2,9 @@ package com.example.hiran.onemarket.Util;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -32,7 +34,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final int BUFFER_SIZE = 2048;
 
     private static SQLiteDatabase db;
-    private static  Cursor c;
+    private static Cursor c;
     private static DBHelper instance;
     private static Context context;
 
@@ -129,6 +131,7 @@ public class DBHelper extends SQLiteOpenHelper {
         }
 
     }
+
     public void createDB() {
         db.execSQL("CREATE TABLE IF NOT EXISTS item(item_code VARCHAR,item_name VARCHAR,unit_price int,description VARCHAR,stock int);");
         db.execSQL("CREATE TABLE IF NOT EXISTS bill(trans_id VARCHAR,total int);");
@@ -160,13 +163,59 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public void insertIntoDB() {
-//        db.execSQL("INSERT INTO sales VALUES('10','abcd',50);");
-//        db.execSQL("INSERT INTO bill VALUES('10',444);");
-//        db.execSQL("INSERT INTO item VALUES('abcd','Mobile Phone',15000,'Samsung',104);");
-        db.execSQL("INSERT INTO login VALUES('Hiran','40bd001563085fc35165329ea1ff5c5ecbdbbeef');");
+        //db.execSQL("INSERT INTO sales VALUES('10','abcd',50);");
+        //db.execSQL("INSERT INTO bill VALUES('10',444);");
+        db.execSQL("INSERT INTO item VALUES('1','Galaxy J5',15000,'Samsung',10);");
+        db.execSQL("INSERT INTO item VALUES('2','Galaxy J7',30000,'Samsung',20);");
+        db.execSQL("INSERT INTO item VALUES('3','Galaxy J2',12000,'Samsung',30);");
+        db.execSQL("INSERT INTO item VALUES('4','Galaxy S6',65000,'Samsung',7);");
+        db.execSQL("INSERT INTO item VALUES('5','Galaxy S7',89000,'Samsung',20);");
+        db.execSQL("INSERT INTO item VALUES('6','Xperia Z5',55000,'Sony',20);");
+        db.execSQL("INSERT INTO item VALUES('7','Xperia Z3',40000,'Sony',17);");
+        db.execSQL("INSERT INTO item VALUES('8','Xperia X',85000,'Sony',14);");
+        db.execSQL("INSERT INTO item VALUES('9','One Plus 3',65000,'One Plus',10);");
+        db.execSQL("INSERT INTO item VALUES('10','Galaxy Note 5',75000,'Samsung',10);");
     }
 
-    public void signUp(EditText uname,EditText passwd) {
+    public List<String> getItems() {
+        List<String> items = new ArrayList<>();
+        for (int i = 1; i <= 10; i++) {
+            try {
+                c = db.rawQuery("SELECT item_name FROM item where item_code = '" + i + "'", null);
+                if (c.getCount() == 0) {
+                    break;
+                }
+                while (c.moveToNext()) {
+                    items.add(c.getString(c.getColumnIndex("item_name")));
+                }
+
+            } catch (android.database.sqlite.SQLiteException ex) {
+                Log.e(TAG, ex.getMessage());
+            }
+        }
+        return items;
+    }
+
+    public List<String> getPrices() {
+        List<String> items = new ArrayList<>();
+        for (int i = 1; i <= 10; i++) {
+            try {
+                c = db.rawQuery("SELECT unit_price FROM item where item_code = '" + i + "'", null);
+                if (c.getCount() == 0) {
+                    break;
+                }
+                while (c.moveToNext()) {
+                    items.add(c.getString(c.getColumnIndex("unit_price")));
+                }
+
+            } catch (android.database.sqlite.SQLiteException ex) {
+                Log.e(TAG, ex.getMessage());
+            }
+        }
+        return items;
+    }
+
+    public void signUp(EditText uname, EditText passwd) {
         try {
             db.execSQL("INSERT INTO login VALUES('" + uname.getText().toString() + "','" + PasswordHash.encryptPassword(passwd.getText().toString()) + "');");
         } catch (android.database.sqlite.SQLiteException ex) {
