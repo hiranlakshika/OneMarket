@@ -48,7 +48,7 @@ public class ExploreAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         View view;
 
         if (convertView == null) {
@@ -59,9 +59,16 @@ public class ExploreAdapter extends BaseAdapter {
             ImageView imageView = (ImageView) view.findViewById(R.id.explore_list_img);
             TextView title = (TextView) view.findViewById(R.id.explore_list_title);
             TextView price = (TextView) view.findViewById(R.id.explore_list_price);
-            addCart = (Button)view.findViewById(R.id.add_cart);
+            addCart = (Button) view.findViewById(R.id.add_cart);
             price.setText("Rs. " + prices.get(position));
             title.setText(titles.get(position));
+
+            addCart.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    buttonClickListener.onButtonClick(titles.get(position));
+                }
+            });
 
             try {
                 if (titles.get(position).equals("Xperia X")) {
@@ -103,6 +110,12 @@ public class ExploreAdapter extends BaseAdapter {
     }
 
     public interface ButtonClickListener {
-        public void onButtonClick(int position);
+        void onButtonClick(String title);
+    }
+
+    private ButtonClickListener buttonClickListener = null;
+
+    public void setButtonClickListener(ButtonClickListener buttonClickListener) {
+        this.buttonClickListener = buttonClickListener;
     }
 }

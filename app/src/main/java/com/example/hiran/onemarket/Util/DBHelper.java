@@ -1,16 +1,9 @@
 package com.example.hiran.onemarket.Util;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
@@ -20,6 +13,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.hiran.onemarket.Activities.MainActivity;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 /**
@@ -101,10 +100,6 @@ public class DBHelper extends SQLiteOpenHelper {
         return instance;
     }
 
-    public int getNumberRows(String table) {
-        return (int) DatabaseUtils.queryNumEntries(db, table);
-    }
-
     public void checkUser(EditText uname, EditText password) {
 
         String pass = "";
@@ -163,8 +158,6 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public void insertIntoDB() {
-        //db.execSQL("INSERT INTO sales VALUES('10','abcd',50);");
-        //db.execSQL("INSERT INTO bill VALUES('10',444);");
         db.execSQL("INSERT INTO item VALUES('1','Galaxy J5',15000,'Samsung',10);");
         db.execSQL("INSERT INTO item VALUES('2','Galaxy J7',30000,'Samsung',20);");
         db.execSQL("INSERT INTO item VALUES('3','Galaxy J2',12000,'Samsung',30);");
