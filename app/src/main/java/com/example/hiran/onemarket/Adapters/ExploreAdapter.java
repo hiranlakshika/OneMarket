@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.hiran.onemarket.R;
+import com.example.hiran.onemarket.Util.DBHelper;
 
 import java.util.List;
 
@@ -67,6 +68,7 @@ public class ExploreAdapter extends BaseAdapter {
                 @Override
                 public void onClick(View v) {
                     buttonClickListener.onButtonClick(titles.get(position));
+                    DBHelper.getInstance(context).insertIntoCart(titles.get(position),Integer.parseInt(prices.get(position)));
                 }
             });
 
@@ -118,4 +120,5 @@ public class ExploreAdapter extends BaseAdapter {
     public void setButtonClickListener(ButtonClickListener buttonClickListener) {
         this.buttonClickListener = buttonClickListener;
     }
+
 }

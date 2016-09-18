@@ -131,6 +131,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE IF NOT EXISTS item(item_code VARCHAR,item_name VARCHAR,unit_price int,description VARCHAR,stock int);");
         db.execSQL("CREATE TABLE IF NOT EXISTS bill(trans_id VARCHAR,total int);");
         db.execSQL("CREATE TABLE IF NOT EXISTS sales(trans_id VARCHAR,item_code VARCHAR,quantity int);");
+        db.execSQL("CREATE TABLE IF NOT EXISTS cart(item VARCHAR,quantity int,price int);");
         db.execSQL("CREATE TABLE IF NOT EXISTS login(username VARCHAR,password VARCHAR);");
     }
 
@@ -157,7 +158,7 @@ public class DBHelper extends SQLiteOpenHelper {
         builder.show();
     }
 
-    public void insertIntoDB() {
+    public void insertIntoItem() {
         db.execSQL("INSERT INTO item VALUES('1','Galaxy J5',15000,'Samsung',10);");
         db.execSQL("INSERT INTO item VALUES('2','Galaxy J7',30000,'Samsung',20);");
         db.execSQL("INSERT INTO item VALUES('3','Galaxy J2',12000,'Samsung',30);");
@@ -170,6 +171,36 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO item VALUES('10','Galaxy Note 5',75000,'Samsung',10);");
     }
 
+    public void insertIntoCart(String item, int price) {
+        db.execSQL("INSERT INTO cart VALUES('" + item + "',1," + price + ");");
+    }
+
+    public int getTotal() {
+        int total = 0;
+        c = db.rawQuery("SELECT sum(price) AS myTotal from cart", null);
+        if (c.getCount() == 0) {
+            return 0;
+        }
+        while (c.moveToNext()) {
+            total = c.getInt(c.getColumnIndex("myTotal"));
+        }
+        return total;
+    }
+
+    public int getQuantity(){
+        int qantity = 0;
+        c = db.rawQuery("SELECT sum(quantity) AS myTotal from cart", null);
+        if (c.getCount() == 0) {
+            return 0;
+        }
+        while (c.moveToNext()) {
+            qantity = c.getInt(c.getColumnIndex("myTotal"));
+        }
+        return qantity;
+    }
+    public void dropCart(){
+        db.execSQL("DROP TABLE IF EXISTS cart");
+    }
     public List<String> getItems() {
         List<String> items = new ArrayList<>();
         for (int i = 1; i <= 10; i++) {

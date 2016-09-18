@@ -19,7 +19,6 @@ import com.example.hiran.onemarket.Util.DBHelper;
  */
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private final String TAG = LoginActivity.class.getSimpleName();
     private EditText uname, password;
 
     @Override
@@ -35,7 +34,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         //Inserting data into database
 //        DBHelper.getInstance(this).insertIntoDB();
-
+        DBHelper.getInstance(this).dropCart();
+        DBHelper.getInstance(this).createDB();
     }
 
     @Override
@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_log_in:
-                DBHelper.getInstance(this).checkUser(uname,password);
+                DBHelper.getInstance(this).checkUser(uname, password);
                 break;
             case R.id.sign_up:
                 Intent intent = new Intent(SignUpActivity.class.getName());
@@ -98,10 +98,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
         return super.onKeyDown(keyCode, event);
     }
-
-
-
-
 
 
 }

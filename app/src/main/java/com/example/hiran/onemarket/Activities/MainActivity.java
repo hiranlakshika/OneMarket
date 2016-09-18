@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity
             ft = fragmentManager.beginTransaction();
             ft.replace(R.id.fragment_place, fragment);
             ft.commit();
-        }else if (id==R.id.viewCart){
+        } else if (id == R.id.viewCart) {
             fragment = new ViewCartFragment();
             ft = fragmentManager.beginTransaction();
             ft.replace(R.id.fragment_place, fragment);
