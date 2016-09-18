@@ -15,7 +15,7 @@ import com.example.hiran.onemarket.Util.DBHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItemDetailActivity extends AppCompatActivity implements View.OnClickListener {
+public class ItemDetailActivity extends AppCompatActivity {
 
     private static final String TAG = ItemDetailActivity.class.getSimpleName();
     private List<String> itemTitles = new ArrayList<>();
@@ -35,12 +35,21 @@ public class ItemDetailActivity extends AppCompatActivity implements View.OnClic
         TextView itemBrand = (TextView) findViewById(R.id.brand);
         addCart = (Button) findViewById(R.id.detail_add_cart);
         ImageView imageView = (ImageView) findViewById(R.id.detail_image);
-        addCart.setOnClickListener(this);
+
         Bundle bundle = getIntent().getExtras();
-        int position = bundle.getInt("Position");
+        final int position = bundle.getInt("Position");
         title.setText(itemTitles.get(position));
         itemPrice.setText("Rs." + itemPrices.get(position));
         itemBrand.setText("Brand : " + brand.get(position));
+
+        addCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showMessage("Congratulations", "Adding cart successful");
+                DBHelper.getInstance(getApplicationContext()).insertIntoCart(itemTitles.get(position), Integer.parseInt(itemPrices.get(position)));
+                onBackPressed();
+            }
+        });
 
         try {
             if (itemTitles.get(position).equals("Xperia X")) {
@@ -80,11 +89,6 @@ public class ItemDetailActivity extends AppCompatActivity implements View.OnClic
 
     }
 
-    @Override
-    public void onClick(View v) {
-        showMessage("Congratulations", "Adding cart successful");
-        super.onBackPressed();
-    }
 
     private void showMessage(String title, String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);

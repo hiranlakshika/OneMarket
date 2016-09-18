@@ -21,6 +21,6 @@
     <string name="latest_items">Latest Items</string>
     <string name="add_to_cart">Add to cart</string>
     <string name="cart_quantity">Item Quantity : </string>
-    <string name="cart_total">Total : Rs. </string>
+    <string name="cart_total">Total : </string>
     <string name="checkout">Checkout</string>
 </resources>

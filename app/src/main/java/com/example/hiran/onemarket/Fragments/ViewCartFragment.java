@@ -27,7 +27,7 @@ public class ViewCartFragment extends Fragment {
         quantity = (TextView) view.findViewById(R.id.itemQuantity);
         total = (TextView) view.findViewById(R.id.itemTotal);
 
-        total.setText(Integer.toString(DBHelper.getInstance(getActivity()).getTotal()));
+        total.setText("Rs. "+Integer.toString(DBHelper.getInstance(getActivity()).getTotal()));
         quantity.setText(Integer.toString(DBHelper.getInstance(getActivity()).getQuantity()));
 
         final Button checkout = (Button) view.findViewById(R.id.checkout);
