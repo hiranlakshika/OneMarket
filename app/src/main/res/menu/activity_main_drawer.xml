@@ -11,6 +11,10 @@
             android:icon="@drawable/search"
             android:title="Explore" />
         <item
+            android:icon="@drawable/cart"
+            android:id="@+id/viewCart"
+            android:title="View Cart" />
+        <item
             android:id="@+id/nav_third_layout"
             android:icon="@drawable/about"
             android:title="About" />

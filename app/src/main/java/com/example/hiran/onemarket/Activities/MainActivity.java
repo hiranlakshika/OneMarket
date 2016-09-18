@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import com.example.hiran.onemarket.Fragments.AboutFragment;
 import com.example.hiran.onemarket.Fragments.ExploreFragment;
 import com.example.hiran.onemarket.Fragments.HomeFragment;
+import com.example.hiran.onemarket.Fragments.ViewCartFragment;
 import com.example.hiran.onemarket.R;
 
 public class MainActivity extends AppCompatActivity
@@ -80,6 +81,11 @@ public class MainActivity extends AppCompatActivity
             ft.commit();
         } else if (id == R.id.nav_third_layout) {
             fragment = new AboutFragment();
+            ft = fragmentManager.beginTransaction();
+            ft.replace(R.id.fragment_place, fragment);
+            ft.commit();
+        }else if (id==R.id.viewCart){
+            fragment = new ViewCartFragment();
             ft = fragmentManager.beginTransaction();
             ft.replace(R.id.fragment_place, fragment);
             ft.commit();
