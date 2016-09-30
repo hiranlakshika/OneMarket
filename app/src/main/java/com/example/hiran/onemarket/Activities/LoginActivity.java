@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         signUp.setOnClickListener(this);
 
         //Inserting data into database
-//        DBHelper.getInstance(this).insertIntoDB();
+        DBHelper.getInstance(this).insertIntoItem();
         DBHelper.getInstance(this).dropCart();
         DBHelper.getInstance(this).createDB();
     }
