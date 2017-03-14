@@ -21,6 +21,9 @@ import com.example.hiran.onemarket.Fragments.HomeFragment;
 import com.example.hiran.onemarket.Fragments.ViewCartFragment;
 import com.example.hiran.onemarket.R;
 
+/**
+ * The type Main activity.
+ */
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -41,7 +44,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         //This fragment shows as the main fragment when the activity starts
-        Fragment fragment = null;
+        Fragment fragment;
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction ft;
         fragment = new HomeFragment();

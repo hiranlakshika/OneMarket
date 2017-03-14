@@ -91,6 +91,12 @@ public class DBHelper extends SQLiteOpenHelper {
             db.close();
     }
 
+    /**
+     * Gets instance.
+     *
+     * @param context the context
+     * @return the instance
+     */
     public static synchronized DBHelper getInstance(Context context) {
         if (instance == null) {
             instance = new DBHelper(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -100,6 +106,12 @@ public class DBHelper extends SQLiteOpenHelper {
         return instance;
     }
 
+    /**
+     * Check user.
+     *
+     * @param uname    the uname
+     * @param password the password
+     */
     public void checkUser(EditText uname, EditText password) {
 
         String pass = "";
@@ -127,6 +139,9 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
+    /**
+     * Create db.
+     */
     public void createDB() {
         db.execSQL("CREATE TABLE IF NOT EXISTS item(item_code VARCHAR,item_name VARCHAR,unit_price int,description VARCHAR,stock int);");
         db.execSQL("CREATE TABLE IF NOT EXISTS bill(trans_id VARCHAR,total int);");
@@ -135,6 +150,9 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE IF NOT EXISTS login(username VARCHAR,password VARCHAR);");
     }
 
+    /**
+     * Select db.
+     */
     public void selectDB() {
         c = db.rawQuery("SELECT * FROM sales", null);
         if (c.getCount() == 0) {
@@ -150,6 +168,12 @@ public class DBHelper extends SQLiteOpenHelper {
         showMessage("Student Details", buffer.toString());
     }
 
+    /**
+     * Show message.
+     *
+     * @param title   the title
+     * @param message the message
+     */
     public void showMessage(String title, String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setCancelable(true);
@@ -158,6 +182,9 @@ public class DBHelper extends SQLiteOpenHelper {
         builder.show();
     }
 
+    /**
+     * Insert into item.
+     */
     public void insertIntoItem() {
         db.execSQL("INSERT INTO item VALUES('1','Galaxy J5',15000,'Samsung',10);");
         db.execSQL("INSERT INTO item VALUES('2','Galaxy J7',30000,'Samsung',20);");
@@ -171,10 +198,21 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO item VALUES('10','Galaxy Note 5',75000,'Samsung',10);");
     }
 
+    /**
+     * Insert into cart.
+     *
+     * @param item  the item
+     * @param price the price
+     */
     public void insertIntoCart(String item, int price) {
         db.execSQL("INSERT INTO cart VALUES('" + item + "',1," + price + ");");
     }
 
+    /**
+     * Gets total.
+     *
+     * @return the total
+     */
     public int getTotal() {
         int total = 0;
         c = db.rawQuery("SELECT sum(price) AS myTotal from cart", null);
@@ -187,6 +225,11 @@ public class DBHelper extends SQLiteOpenHelper {
         return total;
     }
 
+    /**
+     * Get quantity int.
+     *
+     * @return the int
+     */
     public int getQuantity(){
         int qantity = 0;
         c = db.rawQuery("SELECT sum(quantity) AS myTotal from cart", null);
@@ -198,9 +241,19 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         return qantity;
     }
+
+    /**
+     * Drop cart.
+     */
     public void dropCart(){
         db.execSQL("DROP TABLE IF EXISTS cart");
     }
+
+    /**
+     * Gets items.
+     *
+     * @return the items
+     */
     public List<String> getItems() {
         List<String> items = new ArrayList<>();
         for (int i = 1; i <= 10; i++) {
@@ -220,6 +273,11 @@ public class DBHelper extends SQLiteOpenHelper {
         return items;
     }
 
+    /**
+     * Gets brand.
+     *
+     * @return the brand
+     */
     public List<String> getBrand() {
         List<String> items = new ArrayList<>();
         for (int i = 1; i <= 10; i++) {
@@ -239,6 +297,11 @@ public class DBHelper extends SQLiteOpenHelper {
         return items;
     }
 
+    /**
+     * Gets prices.
+     *
+     * @return the prices
+     */
     public List<String> getPrices() {
         List<String> items = new ArrayList<>();
         for (int i = 1; i <= 10; i++) {
@@ -258,6 +321,12 @@ public class DBHelper extends SQLiteOpenHelper {
         return items;
     }
 
+    /**
+     * Sign up.
+     *
+     * @param uname  the uname
+     * @param passwd the passwd
+     */
     public void signUp(EditText uname, EditText passwd) {
         try {
             db.execSQL("INSERT INTO login VALUES('" + uname.getText().toString() + "','" + PasswordHash.encryptPassword(passwd.getText().toString()) + "');");

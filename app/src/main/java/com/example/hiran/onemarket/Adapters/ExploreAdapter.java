@@ -20,12 +20,37 @@ import java.util.List;
  */
 public class ExploreAdapter extends BaseAdapter {
 
-    private List<String> prices, titles;
+    /**
+     * The Prices.
+     */
+    private List<String> prices, /**
+     * The Titles.
+     */
+    titles;
+    /**
+     * The Add cart.
+     */
     private Button addCart;
+    /**
+     * The Layout inflater.
+     */
     private LayoutInflater layoutInflater;
+    /**
+     * The Context.
+     */
     private Context context;
+    /**
+     * The Tag.
+     */
     private String TAG = ExploreAdapter.class.getSimpleName();
 
+    /**
+     * Instantiates a new Explore adapter.
+     *
+     * @param context the context
+     * @param prices  the prices
+     * @param titles  the titles
+     */
     public ExploreAdapter(Context context, List<String> prices, List<String> titles) {
         this.context = context;
         this.prices = prices;
@@ -111,12 +136,28 @@ public class ExploreAdapter extends BaseAdapter {
         return view;
     }
 
+    /**
+     * The interface Button click listener.
+     */
     public interface ButtonClickListener {
+        /**
+         * On button click.
+         *
+         * @param title the title
+         */
         void onButtonClick(String title);
     }
 
+    /**
+     * The Button click listener.
+     */
     private ButtonClickListener buttonClickListener = null;
 
+    /**
+     * Sets button click listener.
+     *
+     * @param buttonClickListener the button click listener
+     */
     public void setButtonClickListener(ButtonClickListener buttonClickListener) {
         this.buttonClickListener = buttonClickListener;
     }
